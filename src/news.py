@@ -16,8 +16,18 @@ class News:
 
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument("-s", "--source", help="source target for news extraction")
-    parser.add_argument("-c", "--count", type=int, help="maximun number of results to return")
+    
+    (parser.add_argument(
+        "-s", 
+        "--source", 
+        help="source target for news extraction"))
+
+    (parser.add_argument(
+        "-c", 
+        "--count", 
+        type=int, 
+        help="maximun number of results to return when extracting by source"))
+
     return parser.parse_args()
 
 
