@@ -5,20 +5,28 @@ from sources.npr.npr_news import NprNews
 
 from model.news_result import NewsResult
 
+from concurrent.futures import ThreadPoolExecutor
+
+
 class HeadlineExtractor:
 
     def get_headlines(self):
-        headlines = []
-        headlines.append(self._get_abc())
-        headlines.append(self._get_bbc())
-        headlines.append(self._get_cnn())
-        headlines.append(self._get_npr())
+        get_calls = ([
+            self._get_abc,
+            self._get_bbc,
+            self._get_cnn,
+            self._get_npr])
 
+        with ThreadPoolExecutor() as executor:
+            futures = [executor.submit(call) for call in get_calls]
+            headlines = [f.result() for f in futures]
+        
         return headlines
 
 
     def _get_npr(self):
         return self._get("NPR", NprNews())
+
 
     def _get_cnn(self):
         return self._get("CNN", CnnNews())
