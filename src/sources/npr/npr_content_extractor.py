@@ -3,6 +3,7 @@ from model.content import Content
 
 SNIPPET_LENGTH = 200
 NPR_PREFIX = "NPR >"
+EDITO_PREFIX = "Editor's note:"
 
 class NprContentExtractor:
 
@@ -30,7 +31,12 @@ class NprContentExtractor:
     def _clean_text(self, text):
         result = ""
         for line in text.split('\n'):
-            if not line.startswith(NPR_PREFIX) and len(line) > 0:
+            if self._is_article_line(line) and len(line) > 0:
                 result += line + " "
        
-        return result        
+        return result     
+
+
+    def _is_article_line(self, line):
+        return (line.startswith(NPR_PREFIX) == False
+            and line.startswith(EDITO_PREFIX) == False) 
