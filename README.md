@@ -17,4 +17,10 @@ for headline in headlines:
     headline.article.snippet
 
     headline.article.url
-```    
+```
+
+### Available Sources
+- ABC
+- BBC
+- CNN
+- NPR
