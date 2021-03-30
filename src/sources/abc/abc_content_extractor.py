@@ -26,6 +26,7 @@ class AbcContentExtractor:
         return cleaned[0 : SNIPPET_LENGTH].rstrip() + "..."
 
 
+
     def _clean_text(self, text):
         result = ""
         for line in text.split('\n'):
